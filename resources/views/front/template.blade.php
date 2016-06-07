@@ -9,7 +9,7 @@
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<title>{{ trans('front/site.title') }}</title>
-		<meta name="description" content="">	
+		<meta name="description" content="">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 
 		@yield('head')
@@ -82,7 +82,7 @@
 									<li>
 										{!! link_to_route('admin', trans('front/site.administration')) !!}
 									</li>
-								@elseif(session('statut') == 'redac') 
+								@elseif(session('statut') == 'redac')
 									<li>
 										{!! link_to('blog', trans('front/site.redaction')) !!}
 									</li>
@@ -106,13 +106,13 @@
 				</div>
 			</div>
 		</nav>
-		@yield('header')	
+		@yield('header')
 	</header>
 
 	<main role="main" class="container">
 		@if(session()->has('ok'))
 			@include('partials/error', ['type' => 'success', 'message' => session('ok')])
-		@endif	
+		@endif
 		@if(isset($info))
 			@include('partials/error', ['type' => 'info', 'message' => $info])
 		@endif
@@ -123,7 +123,7 @@
 		 @yield('footer')
 		<p class="text-center"><small>Copyright &copy; Momo</small></p>
 	</footer>
-		
+
 	{!! HTML::script('//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js') !!}
 	<script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
 	{!! HTML::script('js/plugins.js') !!}
