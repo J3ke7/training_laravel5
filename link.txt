@@ -1,0 +1,23 @@
+1. download xdebug
+
+https://xdebug.org/download.php
+
+
+2. debugbar laravel
+https://github.com/barryvdh/laravel-debugbar
+https://laravel-news.com/2015/02/laravel-debugbar/
+https://www.leighton.com/blog/php-debugging-in-phpstorm-6-0-with-xdebug
+
+3. training laravel
+http://webfaver.com/topics/php-coding/laravel-5
+
+
+
+zend_extension="C:\xampp\php\ext\php_xdebug.dll"
+xdebug.remote_enable=true
+xdebug.remote_host=localhost
+xdebug.remote_port=9000
+xdebug.remote_handler=dbgp
+xdebug.profiler_enable=1
+xdebug.profiler_output_dir="C:\temp"
+xdebug.idekey="PHPSTORM"
