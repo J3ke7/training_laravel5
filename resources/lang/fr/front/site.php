@@ -1,7 +1,7 @@
 <?php
 
 return [
-	'title' => 'Laravel 5',
+	'title' => 'Laravel training 5',
 	'sub-title' => 'Un framework PHP novateur',
 	'home' => 'Accueil',
 	'contact' => 'Contact',
@@ -11,5 +11,7 @@ return [
 	'connection' => 'Connexion',
 	'administration' => 'Administration',
 	'redaction' => 'Rédaction',
-	'logout' => 'Déconnexion'
+	'logout' => 'Déconnexion',
+    'customers' => 'Client'
+
 ];

@@ -56,6 +56,9 @@
 						<li {!! classActivePath('/') !!}>
 							{!! link_to('/', trans('front/site.home')) !!}
 						</li>
+						<li {!! classActivePath('customers') !!}>
+							{!! link_to('customers', trans('front/site.customers')) !!}
+						</li>
 						@if(session('statut') == 'visitor' || session('statut') == 'user')
 							<li {!! classActivePath('contact/create') !!}>
 								{!! link_to('contact/create', trans('front/site.contact')) !!}

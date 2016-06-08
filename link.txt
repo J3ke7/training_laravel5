@@ -11,6 +11,8 @@ https://www.leighton.com/blog/php-debugging-in-phpstorm-6-0-with-xdebug
 3. training laravel
 http://webfaver.com/topics/php-coding/laravel-5
 
+4. send mail
+https://laracasts.com/discuss/channels/laravel/problem-can-not-send-message-without-a-sender-address
 
 
 zend_extension="C:\xampp\php\ext\php_xdebug.dll"
@@ -21,3 +23,15 @@ xdebug.remote_handler=dbgp
 xdebug.profiler_enable=1
 xdebug.profiler_output_dir="C:\temp"
 xdebug.idekey="PHPSTORM"
+xdebug.max_nesting_level = 9000
+
+====================================================================================================
+running command:
+composer update
+composer dump-autoload
+composer require guzzlehttp/guzzle
+composer require barryvdh/laravel-debugbar 
+
+====================================================================================================
+php command:
+php artisan migrate

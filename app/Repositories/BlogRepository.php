@@ -6,7 +6,8 @@ use App\Models\Post,
     App\Models\Tag,
     App\Models\Comment;
 
-class BlogRepository extends BaseRepository {
+class BlogRepository extends BaseRepository
+{
 
     /**
      * The Tag instance.
@@ -31,7 +32,7 @@ class BlogRepository extends BaseRepository {
      * @return void
      */
     public function __construct(
-    Post $post, Tag $tag, Comment $comment) 
+        Post $post, Tag $tag, Comment $comment)
     {
         $this->model = $post;
         $this->tag = $tag;
@@ -42,8 +43,8 @@ class BlogRepository extends BaseRepository {
      * Create or update a post.
      *
      * @param  App\Models\Post $post
-     * @param  array  $inputs
-     * @param  bool   $user_id
+     * @param  array $inputs
+     * @param  bool $user_id
      * @return App\Models\Post
      */
     private function savePost($post, $inputs, $user_id = null)
@@ -70,15 +71,16 @@ class BlogRepository extends BaseRepository {
     {
         return $this->model
             ->select('id', 'created_at', 'updated_at', 'title', 'slug', 'user_id', 'summary')
-                        ->whereActive(true)
-                        ->with('user')
-                        ->latest();
+            //->whereActive(true)
+            ->where('active', '=', 1)
+            //->with('user')
+            ->latest();
     }
 
     /**
      * Get post collection.
      *
-     * @param  int  $n
+     * @param  int $n
      * @return Illuminate\Support\Collection
      */
     public function indexFront($n)
@@ -91,53 +93,53 @@ class BlogRepository extends BaseRepository {
     /**
      * Get post collection.
      *
-     * @param  int  $n
-     * @param  int  $id
+     * @param  int $n
+     * @param  int $id
      * @return Illuminate\Support\Collection
      */
     public function indexTag($n, $id)
     {
         $query = $this->queryActiveWithUserOrderByDate();
 
-        return $query->whereHas('tags', function($q) use($id) {
-                            $q->where('tags.id', $id);
-                        })
-                        ->paginate($n);
+        return $query->whereHas('tags', function ($q) use ($id) {
+            $q->where('tags.id', $id);
+        })
+            ->paginate($n);
     }
 
     /**
      * Get search collection.
      *
-     * @param  int  $n
-     * @param  string  $search
+     * @param  int $n
+     * @param  string $search
      * @return Illuminate\Support\Collection
      */
     public function search($n, $search)
     {
         $query = $this->queryActiveWithUserOrderByDate();
 
-        return $query->where(function($q) use ($search) {
-                    $q->where('summary', 'like', "%$search%")
-                            ->orWhere('content', 'like', "%$search%")
-                            ->orWhere('title', 'like', "%$search%");
-                })->paginate($n);
+        return $query->where(function ($q) use ($search) {
+            $q->where('summary', 'like', "%$search%")
+                ->orWhere('content', 'like', "%$search%")
+                ->orWhere('title', 'like', "%$search%");
+        })->paginate($n);
     }
 
     /**
      * Get post collection.
      *
-     * @param  int     $n
-     * @param  int     $user_id
-     * @param  string  $orderby
-     * @param  string  $direction
+     * @param  int $n
+     * @param  int $user_id
+     * @param  string $orderby
+     * @param  string $direction
      * @return Illuminate\Support\Collection
      */
     public function index($n, $user_id = null, $orderby = 'created_at', $direction = 'desc')
     {
         $query = $this->model
-                ->select('posts.id', 'posts.created_at', 'title', 'posts.seen', 'active', 'user_id', 'slug', 'username')
-                ->join('users', 'users.id', '=', 'posts.user_id')
-                ->orderBy($orderby, $direction);
+            ->select('posts.id', 'posts.created_at', 'title', 'posts.seen', 'active', 'user_id', 'slug', 'username')
+            ->join('users', 'users.id', '=', 'posts.user_id')
+            ->orderBy($orderby, $direction);
 
         if ($user_id) {
             $query->where('user_id', $user_id);
@@ -149,7 +151,7 @@ class BlogRepository extends BaseRepository {
     /**
      * Get post collection.
      *
-     * @param  string  $slug
+     * @param  string $slug
      * @return array
      */
     public function show($slug)
@@ -157,12 +159,12 @@ class BlogRepository extends BaseRepository {
         $post = $this->model->with('user', 'tags')->whereSlug($slug)->firstOrFail();
 
         $comments = $this->comment
-                ->wherePost_id($post->id)
-                ->with('user')
-                ->whereHas('user', function($q) {
-                    $q->whereValid(true);
-                })
-                ->get();
+            ->wherePost_id($post->id)
+            ->with('user')
+            ->whereHas('user', function ($q) {
+                $q->whereValid(true);
+            })
+            ->get();
 
         return compact('post', 'comments');
     }
@@ -187,7 +189,7 @@ class BlogRepository extends BaseRepository {
     /**
      * Get post collection.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return array
      */
     public function GetByIdWithTags($id)
@@ -198,7 +200,7 @@ class BlogRepository extends BaseRepository {
     /**
      * Update a post.
      *
-     * @param  array  $inputs
+     * @param  array $inputs
      * @param  App\Models\Post $post
      * @return void
      */
@@ -229,8 +231,8 @@ class BlogRepository extends BaseRepository {
     /**
      * Update "seen" in post.
      *
-     * @param  array  $inputs
-     * @param  int    $id
+     * @param  array $inputs
+     * @param  int $id
      * @return void
      */
     public function updateSeen($inputs, $id)
@@ -245,8 +247,8 @@ class BlogRepository extends BaseRepository {
     /**
      * Update "active" in post.
      *
-     * @param  array  $inputs
-     * @param  int    $id
+     * @param  array $inputs
+     * @param  int $id
      * @return void
      */
     public function updateActive($inputs, $id)
@@ -261,8 +263,8 @@ class BlogRepository extends BaseRepository {
     /**
      * Create a post.
      *
-     * @param  array  $inputs
-     * @param  int    $user_id
+     * @param  array $inputs
+     * @param  int $user_id
      * @return void
      */
     public function store($inputs, $user_id)
@@ -295,7 +297,8 @@ class BlogRepository extends BaseRepository {
      * @param  App\Models\Post $post
      * @return void
      */
-    public function destroy($post) {
+    public function destroy($post)
+    {
         $post->tags()->detach();
 
         $post->delete();
@@ -304,7 +307,7 @@ class BlogRepository extends BaseRepository {
     /**
      * Get post slug.
      *
-     * @param  int  $comment_id
+     * @param  int $comment_id
      * @return string
      */
     public function getSlug($comment_id)
@@ -315,7 +318,7 @@ class BlogRepository extends BaseRepository {
     /**
      * Get tag name by id.
      *
-     * @param  int  $tag_id
+     * @param  int $tag_id
      * @return string
      */
     public function getTagById($tag_id)

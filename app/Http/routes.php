@@ -15,6 +15,9 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/WelcomeController/contact', 'WelcomeController@contact');
     Route::get('/WelcomeController/about', 'WelcomeController@about');
 
+    // Customers
+    Route::get('customers', 'CustomersController@index');
+
     // Admin
     Route::get('admin', [
         'uses' => 'AdminController@admin',
