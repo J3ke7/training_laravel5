@@ -17,7 +17,7 @@ class CustomersRepository extends BaseRepository
         $this->model = $customers;
     }
 
-    public function getListCustomers()
+    public function index()
     {
         return $this->model->get();
     }

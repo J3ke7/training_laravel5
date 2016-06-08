@@ -20,7 +20,7 @@ class CustomersController extends Controller
 
     public function index()
     {
-        $lstCustomers = $this->customer_gestion->getListCustomers();
+        $lstCustomers = $this->customer_gestion->index();
         return view('front.customers', compact('lstCustomers'));
     }
 }
