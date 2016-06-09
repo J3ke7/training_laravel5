@@ -57,7 +57,12 @@
                                         <tbody>
                                         @foreach($lstCustomers as $iCustomers)
                                             <tr class="gradeA odd" role="row">
-                                                <td></td>
+                                                <td>
+                                                    <samp class="glyphicon glyphicon-edit"
+                                                          name="bnt-show-dialog-info"></samp>
+                                                    &nbsp;
+                                                    <samp class="glyphicon glyphicon-trash"></samp>
+                                                </td>
                                                 <td>{{ $iCustomers->name }}</td>
                                                 <td>{{ $iCustomers->email }}</td>
                                                 <td>{{ $iCustomers->descriptions }}</td>
@@ -115,25 +120,39 @@
                 </div>
             </div>
         </div>
-        {{--@foreach($lstCustomers as $iCustomers)--}}
-        {{--<div class="box">--}}
-        {{--<div class="col-lg-12 text-center">--}}
-        {{--<h2>{{ $->title }}--}}
-        {{--<br>--}}
-        {{--<small>{{ $post->user->username }} {{ trans('front/blog.on') }} {!! $post->created_at . ($post->created_at != $post->updated_at ? trans('front/blog.updated') . $post->updated_at : '') !!}</small>--}}
-        {{--</h2>--}}
-        {{--</div>--}}
-        {{--<div class="col-lg-12">--}}
-        {{--<p>{!! $post->summary !!}</p>--}}
-        {{--</div>--}}
-        {{--<div class="col-lg-12 text-center">--}}
-        {{--{!! link_to('blog/' . $post->slug, trans('front/blog.button'), ['class' => 'btn btn-default btn-lg']) !!}--}}
-        {{--<hr>--}}
-        {{--</div>--}}
-        {{--</div>--}}
-        {{--@endforeach--}}
-
     </div>
 
+    <!-- modal start -->
+    <div id="dialog-edit" class="modal fade bs-example-modal-xs" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h3>Modal header</h3>
+                </div>
+                <div class="modal-body">
+                    {!! Form::control('text', 6, 'name', $errors, trans('front/customers.name')) !!}
+                    {!! Form::control('email', 6, 'email', $errors, trans('front/customers.email')) !!}
+                    {!! Form::control('textarea', 12, 'message', $errors, trans('front/customers.descriptions')) !!}
+                </div>
+                <div class="modal-footer">
+                    <a href="#" class="btn">Close</a>
+                    <a href="#" class="btn btn-primary">Save changes</a>
+                </div>
+            </div>
+        </div>
+        >
+    </div>
+    <!-- modal end -->
+@stop
+@section('scripts')
+    <script>
+        $(document).ready(function () {
+            $("[name=bnt-show-dialog-info]").click(function () {
+                $("#dialog-edit").modal('show');
+            });
+        });
+    </script>
 @stop
 
