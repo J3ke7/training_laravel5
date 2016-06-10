@@ -9,6 +9,8 @@
 namespace App\Http\Controllers;
 
 use App\Repositories\CustomersRepository;
+use Illuminate\Http\Request;
+
 
 class CustomersController extends Controller
 {
