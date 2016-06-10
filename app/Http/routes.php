@@ -17,6 +17,7 @@ Route::group(['middleware' => ['web']], function () {
 
     // Customers
     Route::get('customers', 'CustomersController@index');
+    Route::get('customers/get/{id}', ['uses' => 'CustomersController@get', 'as' => 'customers.get']);
 
     // Admin
     Route::get('admin', [

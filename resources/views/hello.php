@@ -40,11 +40,6 @@
             alt="Laravel PHP Framework"></a>
 
     <h1>You have arrived.</h1>
-    <?php
-    $a = 123;
-    echo $a;
-    echo 1112;
-    ?>
 </div>
 </body>
 </html>

@@ -28,9 +28,13 @@
     {!! HTML::style('https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js') !!}
     <![endif]-->
 
+    {!! HTML::script('//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js') !!}
+    <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
+    {!! HTML::script('js/plugins.js') !!}
+    {!! HTML::script('js/main.js') !!}
+
     {!! HTML::style('http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800') !!}
     {!! HTML::style('http://fonts.googleapis.com/css?family=Josefin+Slab:100,300,400,600,700,100italic,300italic,400italic,600italic,700italic') !!}
-
 </head>
 
 <body>
@@ -141,12 +145,7 @@
     </p>
 </footer>
 
-{!! HTML::script('//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js') !!}
-<script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
-{!! HTML::script('js/plugins.js') !!}
-{!! HTML::script('js/main.js') !!}
-
-        <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+<!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
 <script>
     (function (b, o, i, l, e, r) {
         b.GoogleAnalyticsObject = l;

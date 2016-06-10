@@ -7,6 +7,7 @@
  */
 
 namespace App\Http\Controllers;
+
 use App\Repositories\CustomersRepository;
 
 class CustomersController extends Controller
@@ -21,6 +22,11 @@ class CustomersController extends Controller
     public function index()
     {
         $lstCustomers = $this->customer_gestion->index();
-        return view('front.customers', compact('lstCustomers'));
+        return view('front.customers.index', compact('lstCustomers'));
+    }
+
+    public function get(Request $request, $id)
+    {
+        return redirect('customers')->with('customer', $this->customer_gestion->getById($id));
     }
 }

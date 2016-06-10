@@ -3,13 +3,11 @@
 @section('main')
 
     <div class="row">
-
         <div class="col-lg-12">
             {!! Form::open(['url' => 'customers/search', 'method' => 'get', 'role' => 'form', 'class' => 'pull-right']) !!}
             {!! Form::control('text', 12, 'search', $errors, null, null, null, trans('front/customers.search')) !!}
             {!! Form::close() !!}
         </div>
-
     </div>
 
     <div class="row">
@@ -121,32 +119,17 @@
             </div>
         </div>
     </div>
-
     <!-- modal start -->
-    <div id="dialog-edit" class="modal fade bs-example-modal-xs" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
-         aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h3>Modal header</h3>
-                </div>
-                <div class="modal-body">
-                    {!! Form::control('text', 6, 'name', $errors, trans('front/customers.name')) !!}
-                    {!! Form::control('email', 6, 'email', $errors, trans('front/customers.email')) !!}
-                    {!! Form::control('textarea', 12, 'message', $errors, trans('front/customers.descriptions')) !!}
-                </div>
-                <div class="modal-footer">
-                    <a href="#" class="btn">Close</a>
-                    <a href="#" class="btn btn-primary">Save changes</a>
-                </div>
-            </div>
-        </div>
-        >
-    </div>
+    @include('front.customers.showInfo');
     <!-- modal end -->
+    {{--customer include js_start--}}
+    {!! HTML::script('js/front/customers/index.js') !!}
+    {{--customer include js_end--}}
+    {{--customer include css_start--}}
+    {{ HTML::style('css/customers.css') }};
+    {{--customer include css_end--}}
 @stop
-@section('scripts')
+{{--@section('scripts')
     <script>
         $(document).ready(function () {
             $("[name=bnt-show-dialog-info]").click(function () {
@@ -154,5 +137,4 @@
             });
         });
     </script>
-@stop
-
+@stop--}}
