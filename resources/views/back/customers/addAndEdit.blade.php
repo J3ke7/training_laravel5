@@ -1,4 +1,4 @@
-<div id="dialog-edit" class="modal fade bs-example-modal-xs" tabindex="-1" role="dialog"
+<div id="dialog_addAndEdit" class="modal fade bs-example-modal-xs" tabindex="-1" role="dialog"
      aria-labelledby="myLargeModalLabel"
      aria-hidden="true">
     <div class="modal-dialog modal-lg">
@@ -8,13 +8,17 @@
                 <h3>{{ trans('front/customers.title_dialog_info') }}</h3>
             </div>
             <div class="modal-body">
+                {!! Form::open(['url'=>'customers/update','method'=>'PUT']) !!}
+
                 <table class="table table-borderless">
                     <tr>
                         <td width="20%">
                             {!! Form::label( trans('front/customers.name')) !!}
                         </td>
                         <td width="80%">
-                            {!! Form::input('text', 'name', null,  array('maxlength' => '200', 'class' => 'form-control')) !!}
+                            {!! Form::input('hidden', 'customerId')!!}
+
+                            {!! Form::input('text', 'customerName', null,  array('maxlength' => '200', 'class' => 'form-control')) !!}
                         </td>
                     </tr>
                     <tr>
@@ -22,7 +26,7 @@
                             {!! Form::label( trans('front/customers.email')) !!}
                         </td>
                         <td>
-                            {!! Form::input('email', 'email','', array('maxlength' => '200', 'class' => 'form-control')) !!}
+                            {!! Form::input('email', 'customerEmail','', array('maxlength' => '200', 'class' => 'form-control')) !!}
                         </td>
                     </tr>
                     <tr>
@@ -30,15 +34,18 @@
                             {!! Form::label( trans('front/customers.descriptions')) !!}
                         </td>
                         <td>
-                            {!! Form::input('textarea','descriptions','', array('maxlength' => '200', 'class' => 'form-control')) !!}
+                            {!! Form::input('textarea','customerDescriptions','', array('maxlength' => '200', 'class' => 'form-control')) !!}
                         </td>
                     </tr>
                 </table>
+                {!! Form::close() !!}
             </div>
             <div class="modal-footer">
-                <a href="#" class="btn">Close</a>
-                <a href="#" class="btn btn-primary">Save changes</a>
+                <a class="btn" id="dialog_addAndEdit_close">Close</a>
+                <a class="btn btn-primary" id="dialog_addAndEdit_save">Save changes</a>
             </div>
         </div>
     </div>
 </div>
+
+{!! HTML::script('js/back/customers/addAndEdit.js') !!}

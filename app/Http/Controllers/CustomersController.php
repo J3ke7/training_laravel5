@@ -8,6 +8,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CustomersRequest;
 use App\Repositories\CustomersRepository;
 use Illuminate\Http\Request;
 
@@ -29,6 +30,15 @@ class CustomersController extends Controller
 
     public function get(Request $request, $id)
     {
-        return redirect('customers')->with('customer', $this->customer_gestion->getById($id));
+        $customers = $this->customer_gestion->getCustomersById($id);
+        return response()->json($customers);
+    }
+
+    public function update(
+        CustomersRequest $request,
+        $id)
+    {
+        $customer = $this->customer_gestion->getCustomersById($id);
+        return Response::json($customer);
     }
 }

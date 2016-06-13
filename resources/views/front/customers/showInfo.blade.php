@@ -1,4 +1,4 @@
-<div id="dialog-edit" class="modal fade bs-example-modal-xs" tabindex="-1" role="dialog"
+<div id="dialog_info" class="modal fade bs-example-modal-xs" tabindex="-1" role="dialog"
      aria-labelledby="myLargeModalLabel"
      aria-hidden="true">
     <div class="modal-dialog modal-lg">
@@ -8,39 +8,40 @@
                 <h3>{{ trans('front/customers.title_dialog_info') }}</h3>
             </div>
             <div class="modal-body">
-                @if(isset($customer))
-                    <table class="table table-borderless">
-                        <tr>
-                            <td width="20%">
-                                {!! Form::label( trans('front/customers.name')) !!}
-                            </td>
-                            <td width="80%">
-                                {{ $customer->name  }}
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                {!! Form::label( trans('front/customers.email')) !!}
-                            </td>
-                            <td>
-                                {{ $customer->email  }}
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                {!! Form::label( trans('front/customers.descriptions')) !!}
-                            </td>
-                            <td>
-                                {{ $customer->descriptions  }}
-                            </td>
-                        </tr>
-                    </table>
-                @endif
+                <table class="table table-borderless">
+                    <tr>
+                        <td width="20%">
+                            {!! Form::label( trans('front/customers.name')) !!}
+                        </td>
+                        <td width="80%">
+                            <input type="hidden" name="customerId"/>
+                            <span name="customerName"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            {!! Form::label( trans('front/customers.email')) !!}
+                        </td>
+                        <td>
+                            <span name="customerEmail"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            {!! Form::label( trans('front/customers.descriptions')) !!}
+                        </td>
+                        <td>
+                            <span name="customerDescriptions"></span>
+                        </td>
+                    </tr>
+                </table>
             </div>
             <div class="modal-footer">
-                <a href="#" class="btn" name="bnt-showInfo-close" data-dismiss="modal">Close</a>
-                <a href="#" class="btn btn-primary" name="bnt-showInfo-edit">Edit</a>
+                <a href="#" class="btn" id="bnt_showInfo_close" data-dismiss="modal">Close</a>
+                <a class="btn btn-primary" id="bnt_showInfo_edit">Edit</a>
             </div>
         </div>
     </div>
 </div>
+
+{!! HTML::script('js/front/customers/showInfo.js')  !!}

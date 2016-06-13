@@ -11,5 +11,12 @@ namespace App\Http\Controllers;
 
 class JsonResult
 {
+    public $resultCode;
+    public $resultMessage;
 
+    function _contractor()
+    {
+        $this->resultCode = '1';
+        $this->resultMessage = 'Successfully';
+    }
 }

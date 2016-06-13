@@ -23,11 +23,11 @@
                                         <label>{{ trans('front/customers.show') }} <select
                                                     name="dataTables-example_length" aria-controls="dataTables-example"
                                                     class="form-control input-sm">
-                                                <option value=""></option>
                                                 <option value="10" selected>10</option>
                                                 <option value="25">25</option>
                                                 <option value="50">50</option>
                                                 <option value="100">100</option>
+                                                <option value="">All</option>
                                             </select> {{ trans('front/customers.entries') }} </label></div>
                                 </div>
                             </div>
@@ -57,9 +57,10 @@
                                             <tr class="gradeA odd" role="row">
                                                 <td>
                                                     <samp class="glyphicon glyphicon-edit"
-                                                          name="bnt-show-dialog-info"></samp>
+                                                          name="lk_show_dialog_info"></samp>
                                                     &nbsp;
                                                     <samp class="glyphicon glyphicon-trash"></samp>
+                                                    <input type="hidden" name="customerId" value="{{$iCustomers->id}}"/>
                                                 </td>
                                                 <td>{{ $iCustomers->name }}</td>
                                                 <td>{{ $iCustomers->email }}</td>
@@ -119,22 +120,14 @@
             </div>
         </div>
     </div>
-    <!-- modal start -->
-    @include('front.customers.showInfo');
-    <!-- modal end -->
     {{--customer include js_start--}}
     {!! HTML::script('js/front/customers/index.js') !!}
     {{--customer include js_end--}}
     {{--customer include css_start--}}
     {{ HTML::style('css/customers.css') }};
     {{--customer include css_end--}}
+    <!-- modal start -->
+    @include('front.customers.showInfo');
+    @include('back.customers.addAndEdit');
+    <!-- modal end -->
 @stop
-{{--@section('scripts')
-    <script>
-        $(document).ready(function () {
-            $("[name=bnt-show-dialog-info]").click(function () {
-                $("#dialog-edit").modal('show');
-            });
-        });
-    </script>
-@stop--}}

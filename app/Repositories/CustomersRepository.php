@@ -22,7 +22,7 @@ class CustomersRepository extends BaseRepository
         return $this->model->get();
     }
 
-    public function getById($id)
+    public function getCustomersById($id)
     {
         return $this->getById($id);
     }

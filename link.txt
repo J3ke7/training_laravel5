@@ -14,6 +14,15 @@ http://webfaver.com/topics/php-coding/laravel-5
 4. send mail
 https://laracasts.com/discuss/channels/laravel/problem-can-not-send-message-without-a-sender-address
 
+5. ajax tutorial
+http://www.tutorials.kode-blog.com/laravel-5-ajax-tutorial
+
+6. request tutorial
+https://github.com/rundef/laravel_backbone
+http://rundef.com/building-ajax-web-applications-laravel-backbone-requirejs
+
+
+
 
 zend_extension="C:\xampp\php\ext\php_xdebug.dll"
 xdebug.remote_enable=true
@@ -31,6 +40,8 @@ composer update
 composer dump-autoload
 composer require guzzlehttp/guzzle
 composer require barryvdh/laravel-debugbar 
+composer create-project laravel/laravel ajax-crud
+
 
 ====================================================================================================
 php command:
