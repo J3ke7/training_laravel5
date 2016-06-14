@@ -20,6 +20,13 @@ function getDataEditCustomerById(customerId) {
     });
 }
 
+function resetValueFormDailog(){
+    $("#dialog_addAndEdit").find("[name=customerId]").val('');
+    $("#dialog_addAndEdit").find("[name=customerName]").val('');
+    $("#dialog_addAndEdit").find("[name=customerEmail]").val('');
+    $("#dialog_addAndEdit").find("[name=customerDescriptions]").val('');
+}
+
 $(document).ready(function () {
     $('#dialog_addAndEdit_close').click(function () {
         $('#dialog_addAndEdit').modal('hide');
@@ -56,7 +63,7 @@ $(document).ready(function () {
             data: formData,
             dataType: 'json',
             success: function (data) {
-                if (data.resultCode == 1) {
+                if (data.resultCode == 'OK') {
                     $('#dialog_addAndEdit').modal('hide');
                     if (customerId && customerId != null && customerId > 0) {
                         getDataCustomerById(customerId);

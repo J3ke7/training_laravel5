@@ -30,6 +30,9 @@
                                                 <option value="">All</option>
                                             </select> {{ trans('front/customers.entries') }} </label></div>
                                 </div>
+                                <div class="div-add-customer">
+                                    <button type="button" class="btn btn-primary btn-sm"  name="btn_add_customer">Add customer</button>
+                                </div>
                             </div>
                             <div class="row">
                                 <div class="col-sm-12">
@@ -59,7 +62,7 @@
                                                     <samp class="glyphicon glyphicon-edit"
                                                           name="lk_show_dialog_info"></samp>
                                                     &nbsp;
-                                                    <samp class="glyphicon glyphicon-trash"></samp>
+                                                    <samp class="glyphicon glyphicon-trash" name="lk_delete_customer"></samp>
                                                     <input type="hidden" name="customerId" value="{{$iCustomers->id}}"/>
                                                 </td>
                                                 <td>{{ $iCustomers->name }}</td>

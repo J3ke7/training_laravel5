@@ -38,7 +38,40 @@ class CustomersController extends Controller
         CustomersRequest $request,
         $id)
     {
-        $customer = $this->customer_gestion->getCustomersById($id);
-        return response()->json($customer);
+        $data = new JsonResult();
+        try {
+            $data = $this->customer_gestion->update($request->all(), $id);
+        } catch (Exception $e) {
+            $data->resultCode = 'ERROR';
+            $data->resultMessage = $e;
+        }
+        return response()->json($data);
+    }
+
+    public function create(CustomersRequest $request)
+    {
+        $data = new JsonResult();
+        try {
+            $data = $this->customer_gestion->store($request->all());
+        } catch (Exception $e) {
+            $data->resultCode = 'ERROR';
+            $data->resultMessage = $e;
+        }
+        return response()->json($data);
+    }
+
+    public function delete(
+        CustomersRequest $request,
+        $id)
+    {
+        $data = new JsonResult();
+
+            try {
+            $data = $this->customer_gestion->delete($id);
+        } catch (Exception $e) {
+            $data->resultCode = 'ERROR';
+            $data->resultMessage = $e;
+        }
+        return response()->json($data);
     }
 }

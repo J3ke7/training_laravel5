@@ -14,9 +14,9 @@ class JsonResult
     public $resultCode;
     public $resultMessage;
 
-    function _contractor()
+    function __construct()
     {
-        $this->resultCode = '1';
+        $this->resultCode = 'OK';
         $this->resultMessage = 'Successfully';
     }
 }

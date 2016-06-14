@@ -1,8 +1,6 @@
 <?php namespace App\Http\Requests;
 
-use App\Models\Post;
-
-class CommentRequest extends Request
+class CustomersRequest extends Request
 {
 
     /**
