@@ -1,5 +1,7 @@
 <?php namespace App\Http\Requests;
 
+use App\Models\Post;
+
 class CommentRequest extends Request
 {
 
@@ -10,12 +12,10 @@ class CommentRequest extends Request
      */
     public function rules()
     {
-        $id = $this->customers ? ',' . $this->customers : '';;
         return [
             'name' => 'required|max:200',
-            'summary' => 'required|max:65000',
-            'content' => 'required|max:65000',
+            'email' => 'required|max:65000',
+            'descriptions' => 'required|max:65000',
         ];
     }
-
 }

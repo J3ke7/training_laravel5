@@ -39,6 +39,6 @@ class CustomersController extends Controller
         $id)
     {
         $customer = $this->customer_gestion->getCustomersById($id);
-        return Response::json($customer);
+        return response()->json($customer);
     }
 }

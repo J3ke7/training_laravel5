@@ -8,8 +8,6 @@
                 <h3>{{ trans('front/customers.title_dialog_info') }}</h3>
             </div>
             <div class="modal-body">
-                {!! Form::open(['url'=>'customers/update','method'=>'PUT']) !!}
-
                 <table class="table table-borderless">
                     <tr>
                         <td width="20%">
@@ -38,7 +36,6 @@
                         </td>
                     </tr>
                 </table>
-                {!! Form::close() !!}
             </div>
             <div class="modal-footer">
                 <a class="btn" id="dialog_addAndEdit_close">Close</a>

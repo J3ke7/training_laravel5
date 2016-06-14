@@ -31,10 +31,9 @@ $(document).ready(function () {
     $('#dialog_addAndEdit_save').click(function (e) {
         $.ajaxSetup({
             headers: {
-                'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
-        e.preventDefault();
 
         var formData = {
             name: $("#dialog_addAndEdit").find("[name=customerName]").val(),
@@ -45,7 +44,7 @@ $(document).ready(function () {
         var type = "";
         var url = "";
         if (customerId && customerId != null && customerId > 0) {
-            type = "POST";
+            type = "PUT";
             url = "customers/update/" + customerId;
         } else {
             type = "POST";
