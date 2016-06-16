@@ -69,6 +69,7 @@ $(document).ready(function () {
                         getDataCustomerById(customerId);
                     }
                     alert("Successfully");
+                    location.reload();
                 } else {
                     alert(data.resultMessage);
                 }

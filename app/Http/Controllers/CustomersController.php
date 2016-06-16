@@ -60,9 +60,7 @@ class CustomersController extends Controller
         return response()->json($data);
     }
 
-    public function delete(
-        CustomersRequest $request,
-        $id)
+    public function delete($id)
     {
         $data = new JsonResult();
 

@@ -3,12 +3,19 @@
  */
 function deleteCustomer(customerId) {
     if (confirm('Are you sure?')) {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
         $.ajax({
-            type: 'POST',
+            type: 'DELETE',
             url: 'customers/delete/' + customerId,
             success: function (data) {
                 if (data.resultCode == 'OK') {
                     alert('Successfully');
+                    location.reload();
                 } else {
                     alert(data.resultMessage);
                 }

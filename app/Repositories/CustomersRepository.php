@@ -36,7 +36,6 @@ class CustomersRepository extends BaseRepository
             $customer->name = $inputs['name'];
             $customer->email = $inputs['email'];
             $customer->descriptions = $inputs['descriptions'];
-            $customer->update_at->getTimestamp();
             $customer->save();
         } catch (Exception $e) {
             $data->resultCode = 'ERROR';
@@ -53,8 +52,6 @@ class CustomersRepository extends BaseRepository
             $customer->name = $inputs['name'];
             $customer->email = $inputs['email'];
             $customer->descriptions = $inputs['descriptions'];
-            $customer->create_at->getTimestamp();
-            $customer->update_at->getTimestamp();
             $customer->save();
         } catch (Exception $e) {
             $data->resultCode = 'ERROR';
@@ -68,8 +65,7 @@ class CustomersRepository extends BaseRepository
         $data = new JsonResult();
         try {
             $customer = $this->getCustomersById($id);
-            $this->authorize('change', $customer);
-            $this->blog_gestion->destroy($customer);
+            $customer->delete();
         } catch (Exception $e) {
             $data->resultCode = 'ERROR';
             $data->resultMessage = $e;
