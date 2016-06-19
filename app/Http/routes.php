@@ -21,6 +21,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::put('customers/update/{id?}', 'CustomersController@update');
     Route::post('customers/create', 'CustomersController@create');
     Route::delete('customers/delete/{id?}', 'CustomersController@delete');
+    Route::get('customers/getListCustomers', 'CustomersController@getListCustomers');
 
     // Admin
     Route::get('admin', [

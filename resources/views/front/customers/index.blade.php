@@ -37,7 +37,7 @@
                             <div class="row">
                                 <div class="col-sm-12">
                                     <table class="table table-striped table-bordered table-hover dataTable no-footer"
-                                           id="dataTables-example" role="grid"
+                                           id="dataTables" role="grid"
                                            aria-describedby="dataTables-example_info">
                                         <thead>
                                         <tr role="row">
@@ -55,7 +55,7 @@
                                             </th>
                                         </tr>
                                         </thead>
-                                        <tbody>
+                                        <tbody id="dataTables_tbody">
                                         @foreach($lstCustomers as $iCustomers)
                                             <tr class="gradeA odd" role="row">
                                                 <td>

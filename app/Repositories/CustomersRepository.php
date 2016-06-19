@@ -9,7 +9,7 @@
 namespace App\Repositories;
 
 use App\Models\Customers;
-use App\Http\Controllers\JsonResult;
+use App\Http\Response\CustomersResponse;
 
 class CustomersRepository extends BaseRepository
 {
@@ -18,7 +18,7 @@ class CustomersRepository extends BaseRepository
         $this->model = $customers;
     }
 
-    public function index()
+    public function getAll()
     {
         return $this->model->get();
     }
@@ -30,7 +30,7 @@ class CustomersRepository extends BaseRepository
 
     public function update($inputs, $id)
     {
-        $data = new JsonResult();
+        $data = new CustomersResponse();
         try {
             $customer = $this->getCustomersById($id);
             $customer->name = $inputs['name'];
@@ -38,15 +38,15 @@ class CustomersRepository extends BaseRepository
             $customer->descriptions = $inputs['descriptions'];
             $customer->save();
         } catch (Exception $e) {
-            $data->resultCode = 'ERROR';
-            $data->resultMessage = $e;
+            $data->setResultCode('ERROR');
+            $data->setResultMessage($e);
         }
         return $data;
     }
 
     public function store($inputs)
     {
-        $data = new JsonResult();
+        $data = new CustomersResponse();
         try {
             $customer = new $this->model;
             $customer->name = $inputs['name'];
@@ -54,21 +54,21 @@ class CustomersRepository extends BaseRepository
             $customer->descriptions = $inputs['descriptions'];
             $customer->save();
         } catch (Exception $e) {
-            $data->resultCode = 'ERROR';
-            $data->resultMessage = $e;
+            $data->setResultCode('ERROR');
+            $data->setResultMessage($e);
         }
         return $data;
     }
 
     public function delete($id)
     {
-        $data = new JsonResult();
+        $data = new CustomersResponse();
         try {
             $customer = $this->getCustomersById($id);
             $customer->delete();
         } catch (Exception $e) {
-            $data->resultCode = 'ERROR';
-            $data->resultMessage = $e;
+            $data->setResultCode('ERROR');
+            $data->setResultMessage($e);
         }
         return $data;
     }

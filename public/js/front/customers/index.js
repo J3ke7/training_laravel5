@@ -15,7 +15,7 @@ function deleteCustomer(customerId) {
             success: function (data) {
                 if (data.resultCode == 'OK') {
                     alert('Successfully');
-                    location.reload();
+                    reloadDivContent();
                 } else {
                     alert(data.resultMessage);
                 }
@@ -25,6 +25,40 @@ function deleteCustomer(customerId) {
             }
         });
     }
+}
+
+function reloadDivContent() {
+    setInterval(function () {
+        $.ajax({
+            type: "GET",
+            url: "customers/getListCustomers",
+            success: function (data) {
+                $("#dataTables_tbody").empty();
+                if (data.resultCode == 'OK') {
+                    var html = "";
+                    for (i in data.lstCustomers) {
+                        var item = data.lstCustomers[i];
+                        var text = '<tr class="gradeA odd" role="row">'
+                            + '<td>'
+                            + '<samp class="glyphicon glyphicon-edit" name="lk_show_dialog_info"></samp>&nbsp;'
+                            + '<samp class="glyphicon glyphicon-trash" name="lk_delete_customer"></samp>'
+                            + '<input type="hidden" name="customerId" value="' + item.customerId + '"/>'
+                            + '</td>'
+                            + '<td>' + item.name + '</td>'
+                            + '<td>' + item.email + '</td>'
+                            + '<td>' + item.descriptions + '</td>'
+                            + '<td class="center">' + item.created_at + '</td>'
+                            + '<td class="center">' + item.updated_at + '</td>'
+                            + '</tr>';
+                        html += text;
+                    }
+                    $("#dataTables_tbody").html(html);
+                }
+            },
+            error: function (data) {
+            }
+        });
+    }, 1000);
 }
 
 $(document).ready(function () {
