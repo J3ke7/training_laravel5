@@ -1,5 +1,4 @@
-
-function sansAccent(str){
+function sansAccent(str) {
     var accent = [
         /[\300-\306]/g, /[\340-\346]/g, // A, a
         /[\310-\313]/g, /[\350-\353]/g, // E, e
@@ -9,9 +8,22 @@ function sansAccent(str){
         /[\321]/g, /[\361]/g, // N, n
         /[\307]/g, /[\347]/g // C, c
     ];
-    var noaccent = ['A','a','E','e','I','i','O','o','U','u','N','n','C','c'];
-    for(var i = 0; i < accent.length; i++){
+    var noaccent = ['A', 'a', 'E', 'e', 'I', 'i', 'O', 'o', 'U', 'u', 'N', 'n', 'C', 'c'];
+    for (var i = 0; i < accent.length; i++) {
         str = str.replace(accent[i], noaccent[i]);
     }
     return str;
+}
+
+/**
+ *  show message notifications
+ * @param type = {info, success, warning, danger, inverse, blackgloss}
+ * @param text
+ */
+
+function notifications(type, text) {
+    $('.notifications').notify({
+        type: type,
+        message: {text: text}
+    }).show();
 }

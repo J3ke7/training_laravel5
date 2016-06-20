@@ -18,9 +18,15 @@ class CustomersRepository extends BaseRepository
         $this->model = $customers;
     }
 
-    public function getAll()
+    public function getList($object = null)
     {
-        return $this->model->get();
+        if ($object && $object != null && isset($object['search'])) {
+            $search = $object['search'];//->appends(compact('search'))
+            $data = $this->model->where('name', 'like', '%' . $search . '%')->paginate(10);
+        } else {
+            $data = $this->model->paginate(10);
+        }
+        return $data;
     }
 
     public function getCustomersById($id)

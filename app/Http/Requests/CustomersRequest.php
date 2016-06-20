@@ -15,5 +15,6 @@ class CustomersRequest extends Request
             'email' => 'required|max:65000',
             'descriptions' => 'required|max:65000',
         ];
+        return Validator::make($input, $rules);
     }
 }

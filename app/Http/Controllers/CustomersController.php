@@ -10,30 +10,29 @@ namespace App\Http\Controllers;
 
 use App\Http\Response\CustomersResponse;
 use App\Http\Requests\CustomersRequest;
-use App\Repositories\CustomersRepository;
-use Illuminate\Http\Request;
 
 
 class CustomersController extends Controller
 {
     protected $customer_gestion;
 
-    public function __construct(CustomersRepository $customer_gestion)
+    public function __construct(CustomersRequest $customer_gestion)
     {
         $this->customer_gestion = $customer_gestion;
     }
 
     public function index()
     {
-        $lstCustomers = $this->customer_gestion->getAll();
-        return view('front.customers.index', compact('lstCustomers'));
+        $object = $this->customer_gestion->getList(null);
+
+        return view('front.customers.index', compact('object'));
     }
 
     public function getListCustomers()
     {
         $data = new CustomersResponse();
         try {
-            $lstCustomers = $this->customer_gestion->getAll();
+            $lstCustomers = $this->customer_gestion->getList(null);
             $data->setLstCustomers($lstCustomers);
         } catch (Exception $e) {
             $data->setResultCode('ERROR');
@@ -42,7 +41,13 @@ class CustomersController extends Controller
         return response()->json($data);
     }
 
-    public function get(Request $request, $id)
+    public function search(CustomersRequest $request)
+    {
+        $object = $this->customer_gestion->getList($request->all());
+        return view('front.customers.index', compact('object'));
+    }
+
+    public function get(CustomersRequest $request, $id)
     {
         $customers = $this->customer_gestion->getCustomersById($id);
         return response()->json($customers);

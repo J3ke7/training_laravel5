@@ -21,6 +21,8 @@ http://www.tutorials.kode-blog.com/laravel-5-ajax-tutorial
 https://github.com/rundef/laravel_backbone
 http://rundef.com/building-ajax-web-applications-laravel-backbone-requirejs
 
+7. composer install
+https://getcomposer.org/download/
 
 
 

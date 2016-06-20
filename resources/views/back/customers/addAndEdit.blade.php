@@ -8,6 +8,11 @@
                 <h3>{{ trans('front/customers.title_dialog_info') }}</h3>
             </div>
             <div class="modal-body">
+                <div  name="div-errors">
+                    <p>The following errors have occurred: <span name="total-errors"></span></p>
+                    <ul name="list-error">
+                    </ul>
+                </div>
                 <table class="table table-borderless">
                     <tr>
                         <td width="20%">

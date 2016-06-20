@@ -22,6 +22,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::post('customers/create', 'CustomersController@create');
     Route::delete('customers/delete/{id?}', 'CustomersController@delete');
     Route::get('customers/getListCustomers', 'CustomersController@getListCustomers');
+    Route::get('customers/search', 'CustomersController@search');
 
     // Admin
     Route::get('admin', [

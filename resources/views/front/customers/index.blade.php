@@ -31,7 +31,9 @@
                                             </select> {{ trans('front/customers.entries') }} </label></div>
                                 </div>
                                 <div class="div-add-customer">
-                                    <button type="button" class="btn btn-primary btn-sm"  name="btn_add_customer">Add customer</button>
+                                    <button type="button" class="btn btn-primary btn-sm" name="btn_add_customer">Add
+                                        customer
+                                    </button>
                                 </div>
                             </div>
                             <div class="row">
@@ -56,13 +58,14 @@
                                         </tr>
                                         </thead>
                                         <tbody id="dataTables_tbody">
-                                        @foreach($lstCustomers as $iCustomers)
+                                        @foreach($object  as $iCustomers)
                                             <tr class="gradeA odd" role="row">
                                                 <td>
                                                     <samp class="glyphicon glyphicon-edit"
                                                           name="lk_show_dialog_info"></samp>
                                                     &nbsp;
-                                                    <samp class="glyphicon glyphicon-trash" name="lk_delete_customer"></samp>
+                                                    <samp class="glyphicon glyphicon-trash"
+                                                          name="lk_delete_customer"></samp>
                                                     <input type="hidden" name="customerId" value="{{$iCustomers->id}}"/>
                                                 </td>
                                                 <td>{{ $iCustomers->name }}</td>
@@ -80,10 +83,22 @@
                                 <div class="col-sm-6">
                                     <div class="dataTables_info" id="dataTables-example_info" role="status"
                                          aria-live="polite">
-                                        Showing 1 to 10 of 57 entries
+                                        Showing {{ ($object->currentPage() -1) * $object->perPage() + 1 }}
+                                        to {{
+                                        ($object->currentPage()-1) * $object->perPage() + $object->count()
+                                         }}
+                                        of {{ $object->total() }} entries
                                     </div>
                                 </div>
-                                <div class="col-sm-6">
+
+                                @if($object->lastPage() > 1)
+                                    <div class="col-sm-6">
+                                        <!--{!! $object->render() !!}-->
+                                        {{ with(new App\Http\Util\PagingPresenter($object))->render() }}
+
+                                    </div>
+                                    @endif
+                                            <!--  <div class="col-sm-6">
                                     <div class="dataTables_paginate paging_simple_numbers"
                                          id="dataTables-example_paginate">
                                         <ul class="pagination">
@@ -91,31 +106,12 @@
                                                 aria-controls="dataTables-example"
                                                 tabindex="0" id="dataTables-example_previous"><a href="#">Previous</a>
                                             </li>
-                                            <li class="paginate_button active" aria-controls="dataTables-example"
-                                                tabindex="0">
-                                                <a
-                                                        href="#">1</a></li>
-                                            <li class="paginate_button " aria-controls="dataTables-example"
-                                                tabindex="0"><a
-                                                        href="#">2</a></li>
-                                            <li class="paginate_button " aria-controls="dataTables-example"
-                                                tabindex="0"><a
-                                                        href="#">3</a></li>
-                                            <li class="paginate_button " aria-controls="dataTables-example"
-                                                tabindex="0"><a
-                                                        href="#">4</a></li>
-                                            <li class="paginate_button " aria-controls="dataTables-example"
-                                                tabindex="0"><a
-                                                        href="#">5</a></li>
-                                            <li class="paginate_button " aria-controls="dataTables-example"
-                                                tabindex="0"><a
-                                                        href="#">6</a></li>
                                             <li class="paginate_button next" aria-controls="dataTables-example"
                                                 tabindex="0"
                                                 id="dataTables-example_next"><a href="#">Next</a></li>
                                         </ul>
                                     </div>
-                                </div>
+                                </div>-->
                             </div>
                         </div>
                     </div>

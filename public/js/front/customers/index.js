@@ -3,6 +3,7 @@
  */
 function deleteCustomer(customerId) {
     if (confirm('Are you sure?')) {
+        $('.loadingPanel').toggle();
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -14,14 +15,16 @@ function deleteCustomer(customerId) {
             url: 'customers/delete/' + customerId,
             success: function (data) {
                 if (data.resultCode == 'OK') {
-                    alert('Successfully');
+                    $('.loadingPanel').toggle();
+                    notifications('success', 'Successfully');
                     reloadDivContent();
                 } else {
-                    alert(data.resultMessage);
+                    notifications('danger', data.resultMessage);
                 }
             },
             error: function (data) {
-                alert('Fail');
+                $('.loadingPanel').toggle();
+                notifications('danger', 'Fail')
             }
         });
     }
@@ -42,7 +45,7 @@ function reloadDivContent() {
                             + '<td>'
                             + '<samp class="glyphicon glyphicon-edit" name="lk_show_dialog_info"></samp>&nbsp;'
                             + '<samp class="glyphicon glyphicon-trash" name="lk_delete_customer"></samp>'
-                            + '<input type="hidden" name="customerId" value="' + item.customerId + '"/>'
+                            + '<input type="hidden" name="customerId" value="' + item.id + '"/>'
                             + '</td>'
                             + '<td>' + item.name + '</td>'
                             + '<td>' + item.email + '</td>'
@@ -53,6 +56,7 @@ function reloadDivContent() {
                         html += text;
                     }
                     $("#dataTables_tbody").html(html);
+                    enableAction();
                 }
             },
             error: function (data) {
@@ -61,7 +65,7 @@ function reloadDivContent() {
     }, 1000);
 }
 
-$(document).ready(function () {
+function enableAction(){
     $("[name=lk_show_dialog_info]").click(function () {
         var customerId = $(this).closest("tr").find("[name=customerId]").val();
         getDataCustomerById(customerId);
@@ -74,4 +78,8 @@ $(document).ready(function () {
         var customerId = $(this).closest("tr").find("[name=customerId]").val();
         deleteCustomer(customerId);
     });
+}
+
+$(document).ready(function () {
+    enableAction();
 });

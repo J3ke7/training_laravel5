@@ -15,13 +15,18 @@
     <title>{{ trans('front/site.title') }}</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="csrf-token" content="{{ csrf_token() }}" />
+    <meta name="csrf-token" content="{{ csrf_token() }}"/>
 
     @yield('head')
 
-		{!! HTML::style('css/main_front.css') !!}
+    {!! HTML::style('css/main_front.css') !!}
+            <!--notifications_start-->
+    {!! HTML::style('css/bootstrap_notify.css') !!}
+    {!! HTML::style('css/notifications/alert_bangtidy.css') !!}
+    {!! HTML::style('css/notifications/alert_blackgloss.css') !!}
+            <!--notifications_end-->
 
-		<!--[if (lt IE 9) & (!IEMobile)]>
+    <!--[if (lt IE 9) & (!IEMobile)]>
     {!! HTML::script('js/vendor/respond.min.js') !!}
     <![endif]-->
     <!--[if lt IE 9]>
@@ -33,6 +38,9 @@
     <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
     {!! HTML::script('js/plugins.js') !!}
     {!! HTML::script('js/main.js') !!}
+            <!--notifications_start-->
+    {!! HTML::script('js/bootstrap-notify.js') !!}
+            <!--notifications_end-->
 
     {!! HTML::style('http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800') !!}
     {!! HTML::style('http://fonts.googleapis.com/css?family=Josefin+Slab:100,300,400,600,700,100italic,300italic,400italic,600italic,700italic') !!}
@@ -165,6 +173,18 @@
 </script>
 
 @yield('scripts')
-
+        <!--notifications_start-->
+<div class='notifications bottom-right'></div>
+<!--notifications_end-->
+<!--loading panel_start-->
+<div class='loadingPanel' style="display: none">
+    <div class="loadingPanel-div">
+        <img width="32" height="32"
+             alt="Loading"
+             src="{!! asset('img/ajax-loader.gif') !!}"/>
+        Loading ..
+    </div>
+</div>
+<!--loading panel_end-->
 </body>
 </html>
