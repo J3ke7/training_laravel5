@@ -3,6 +3,7 @@ namespace App\Http\Util;
 
 use Illuminate\Pagination\BootstrapThreePresenter;
 use Illuminate\Support\HtmlString;
+
 /**
  * Created by PhpStorm.
  * User: Administrator
@@ -11,6 +12,12 @@ use Illuminate\Support\HtmlString;
  */
 class PagingPresenter extends BootstrapThreePresenter
 {
+    public function appends(array $appends)
+    {
+        $this->paginator->appends($appends);
+        return $this;
+    }
+
     public function render()
     {
         if ($this->hasPages()) {
@@ -76,7 +83,7 @@ class PagingPresenter extends BootstrapThreePresenter
     /**
      * Get the next page pagination element.
      *
-     * @param  string  $text
+     * @param  string $text
      * @return string
      */
     public function getNextButton($text = '&raquo; Next')
@@ -84,7 +91,7 @@ class PagingPresenter extends BootstrapThreePresenter
         // If the current page is greater than or equal to the last page, it means we
         // can't go any further into the pages, as we're already on this last page
         // that is available, so we will make it the "next" link style disabled.
-        if (! $this->paginator->hasMorePages()) {
+        if (!$this->paginator->hasMorePages()) {
             return $this->getDisabledTextWrapper($text);
         }
 

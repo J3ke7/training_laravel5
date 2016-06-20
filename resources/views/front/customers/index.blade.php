@@ -93,8 +93,7 @@
 
                                 @if($object->lastPage() > 1)
                                     <div class="col-sm-6">
-                                        <!--{!! $object->render() !!}-->
-                                        {{ with(new App\Http\Util\PagingPresenter($object))->render() }}
+                                        {{$articles->render($presenter)}}
 
                                     </div>
                                     @endif
@@ -125,7 +124,7 @@
     {{--customer include css_start--}}
     {{ HTML::style('css/customers.css') }};
     {{--customer include css_end--}}
-    <!-- modal start -->
+            <!-- modal start -->
     @include('front.customers.showInfo');
     @include('back.customers.addAndEdit');
     <!-- modal end -->

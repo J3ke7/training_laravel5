@@ -17,7 +17,9 @@
 | loading any of our classes later on. It feels nice to relax.
 |
 */
+
 require __DIR__.'/../bootstrap/autoload.php';
+
 /*
 |--------------------------------------------------------------------------
 | Turn On The Lights

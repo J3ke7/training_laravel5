@@ -8,15 +8,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Response\CustomersResponse;
 use App\Http\Requests\CustomersRequest;
-
+use App\Http\Response\CustomersResponse;
+use App\Repositories\CustomersRepository;
+use Illuminate\Http\Request;
+use App\Http\Util;
+use Illuminate\Pagination;
 
 class CustomersController extends Controller
 {
     protected $customer_gestion;
 
-    public function __construct(CustomersRequest $customer_gestion)
+    public function __construct(CustomersRepository $customer_gestion)
     {
         $this->customer_gestion = $customer_gestion;
     }
@@ -24,7 +27,6 @@ class CustomersController extends Controller
     public function index()
     {
         $object = $this->customer_gestion->getList(null);
-
         return view('front.customers.index', compact('object'));
     }
 
@@ -41,10 +43,19 @@ class CustomersController extends Controller
         return response()->json($data);
     }
 
-    public function search(CustomersRequest $request)
+    public function search(Request $request)
     {
-        $object = $this->customer_gestion->getList($request->all());
-        return view('front.customers.index', compact('object'));
+        $object = $request->all();
+        $object = $this->customer_gestion->getList($object);
+        if ($object != null) {
+            $searchString = $object['search'];
+            $articles = new Illuminate\Pagination();
+            $articles->appends(['search'=> $searchString]);
+            $presenter = new App\Http\Util\PagingPresenter($articles);
+            return view('front.customers.index', compact('object'))->with('articles',$articles);
+        } else {
+            return view('front.customers.index', compact('object'));
+        }
     }
 
     public function get(CustomersRequest $request, $id)
