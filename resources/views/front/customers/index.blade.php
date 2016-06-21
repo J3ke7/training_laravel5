@@ -94,7 +94,6 @@
                                 @if($object->lastPage() > 1)
                                     <div class="col-sm-6">
                                         {{$articles->render($presenter)}}
-
                                     </div>
                                     @endif
                                             <!--  <div class="col-sm-6">

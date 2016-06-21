@@ -12,8 +12,8 @@ use App\Http\Requests\CustomersRequest;
 use App\Http\Response\CustomersResponse;
 use App\Repositories\CustomersRepository;
 use Illuminate\Http\Request;
-use App\Http\Util;
-use Illuminate\Pagination;
+use App\Http\Util\PagingPresenter;
+use Illuminate\Pagination\Paginator;
 
 class CustomersController extends Controller
 {
@@ -26,8 +26,10 @@ class CustomersController extends Controller
 
     public function index()
     {
+        $articles = new Paginator();
+        $presenter = new PagingPresenter($articles);
         $object = $this->customer_gestion->getList(null);
-        return view('front.customers.index', compact('object'));
+        return view('front.customers.index', compact('object'))->with('articles',$articles)->with('presenter',$presenter);
     }
 
     public function getListCustomers()
@@ -49,10 +51,10 @@ class CustomersController extends Controller
         $object = $this->customer_gestion->getList($object);
         if ($object != null) {
             $searchString = $object['search'];
-            $articles = new Illuminate\Pagination();
+            $articles = new Pagination();
             $articles->appends(['search'=> $searchString]);
-            $presenter = new App\Http\Util\PagingPresenter($articles);
-            return view('front.customers.index', compact('object'))->with('articles',$articles);
+            $presenter = new PagingPresenter($articles);
+            return view('front.customers.index', compact('object'))->with('articles',$articles)->with('presenter',$presenter);
         } else {
             return view('front.customers.index', compact('object'));
         }
