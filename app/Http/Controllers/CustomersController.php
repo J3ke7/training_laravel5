@@ -13,6 +13,7 @@ use App\Http\Response\CustomersResponse;
 use App\Repositories\CustomersRepository;
 use Illuminate\Http\Request;
 use App\Http\Util\PagingPresenter;
+use App\Http\Util\CustomPresenter;
 use Illuminate\Pagination\Paginator;
 
 class CustomersController extends Controller
@@ -26,10 +27,9 @@ class CustomersController extends Controller
 
     public function index()
     {
-        $articles = new Paginator();
-        $presenter = new PagingPresenter($articles);
         $object = $this->customer_gestion->getList(null);
-        return view('front.customers.index', compact('object'))->with('articles',$articles)->with('presenter',$presenter);
+        $presenter = new CustomPresenter($object);
+        return view('front.customers.index', compact('object', 'presenter'));
     }
 
     public function getListCustomers()
@@ -47,20 +47,19 @@ class CustomersController extends Controller
 
     public function search(Request $request)
     {
-        $object = $request->all();
-        $object = $this->customer_gestion->getList($object);
-        if ($object != null) {
-            $searchString = $object['search'];
-            $articles = new Pagination();
-            $articles->appends(['search'=> $searchString]);
-            $presenter = new PagingPresenter($articles);
-            return view('front.customers.index', compact('object'))->with('articles',$articles)->with('presenter',$presenter);
+        $params = $request->all();
+        $object = $this->customer_gestion->getList($params);
+        $presenter = new CustomPresenter($object);
+        if ($object != null && isset($params['search'])) {
+            $search = $params['search'];
+            $presenter->appends(['search'=> $search]);
+            return view('front.customers.index')->with(compact('object', 'presenter'));
         } else {
-            return view('front.customers.index', compact('object'));
+            return view('front.customers.index', compact('object', 'presenter'));
         }
     }
 
-    public function get(CustomersRequest $request, $id)
+    public function get(Request $request, $id)
     {
         $customers = $this->customer_gestion->getCustomersById($id);
         return response()->json($customers);

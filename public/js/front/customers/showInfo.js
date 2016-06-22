@@ -2,6 +2,7 @@
  * Created by tien.nguyen on 6/13/2016.
  */
 function getDataCustomerById(customerId) {
+    $('.loadingPanel').toggle();
     $.ajax({
         type: "GET",
         url: 'customers/get/' + customerId,
@@ -12,10 +13,12 @@ function getDataCustomerById(customerId) {
                 $("#dialog_info").find("[name=customerEmail]").text(data.email);
                 $("#dialog_info").find("[name=customerDescriptions]").text(data.descriptions);
                 $('#dialog_info').modal('show');
+                $('.loadingPanel').toggle();
             }
         },
         error: function (data) {
-            alert('fail');
+            $('.loadingPanel').toggle();
+            notifications('danger', 'Fail');
         }
     });
 }

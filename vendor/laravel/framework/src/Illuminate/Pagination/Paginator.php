@@ -24,10 +24,10 @@ class Paginator extends AbstractPaginator implements Arrayable, ArrayAccess, Cou
     /**
      * Create a new paginator instance.
      *
-     * @param  mixed  $items
-     * @param  int  $perPage
-     * @param  int|null  $currentPage
-     * @param  array  $options (path, query, fragment, pageName)
+     * @param  mixed $items
+     * @param  int $perPage
+     * @param  int|null $currentPage
+     * @param  array $options (path, query, fragment, pageName)
      * @return void
      */
     public function __construct($items, $perPage, $currentPage = null, array $options = [])
@@ -47,14 +47,14 @@ class Paginator extends AbstractPaginator implements Arrayable, ArrayAccess, Cou
     /**
      * Get the current page for the request.
      *
-     * @param  int  $currentPage
+     * @param  int $currentPage
      * @return int
      */
     protected function setCurrentPage($currentPage)
     {
         $currentPage = $currentPage ?: static::resolveCurrentPage();
 
-        return $this->isValidPageNumber($currentPage) ? (int) $currentPage : 1;
+        return $this->isValidPageNumber($currentPage) ? (int)$currentPage : 1;
     }
 
     /**
@@ -94,7 +94,7 @@ class Paginator extends AbstractPaginator implements Arrayable, ArrayAccess, Cou
     /**
      * Render the paginator using the given presenter.
      *
-     * @param  \Illuminate\Contracts\Pagination\Presenter|null  $presenter
+     * @param  \Illuminate\Contracts\Pagination\Presenter|null $presenter
      * @return string
      */
     public function links(Presenter $presenter = null)
@@ -105,7 +105,7 @@ class Paginator extends AbstractPaginator implements Arrayable, ArrayAccess, Cou
     /**
      * Render the paginator using the given presenter.
      *
-     * @param  \Illuminate\Contracts\Pagination\Presenter|null  $presenter
+     * @param  \Illuminate\Contracts\Pagination\Presenter|null $presenter
      * @return string
      */
     public function render(Presenter $presenter = null)
@@ -147,7 +147,7 @@ class Paginator extends AbstractPaginator implements Arrayable, ArrayAccess, Cou
     /**
      * Convert the object to its JSON representation.
      *
-     * @param  int  $options
+     * @param  int $options
      * @return string
      */
     public function toJson($options = 0)
