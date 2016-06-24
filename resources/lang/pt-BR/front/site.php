@@ -1,7 +1,7 @@
 <?php
 
 return [
-	'title' => 'Laravel training 5',
+		'title' => 'Training project',
 	'sub-title' => 'Um fantástico framework PHP',
 	'home' => 'Home',
 	'contact' => 'Contato',

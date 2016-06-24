@@ -65,7 +65,7 @@ function reloadDivContent() {
     }, 1000);
 }
 
-function enableAction(){
+function enableAction() {
     $("[name=lk_show_dialog_info]").click(function () {
         var customerId = $(this).closest("tr").find("[name=customerId]").val();
         getDataCustomerById(customerId);
