@@ -6,5 +6,9 @@
 }
 .div-add-customer{
     float:right;
-    margin-right: 15px;
+    margin-bottom: 15px;
+}
+
+.text-al-right{
+    text-align: right;
 }

@@ -10,7 +10,7 @@ echo '<?xml version="1.0" encoding="UTF-8"?>';
   <contact firstName="<?php echo $faker->firstName ?>" lastName="<?php echo $faker->lastName ?>" email="<?php echo $faker->email ?>" >
     <phone number="<?php echo $faker->phoneNumber ?>"/>
 <?php if ($faker->boolean(25)): ?>
-    <birth date="<?php echo $faker->dateTimeThisCentury->format('Y-m-d') ?>" place="<?php echo $faker->city ?>"/>
+    <birth date="<?php echo $faker->dateTimeThisCentury->format('Y-m-d') ?> " place="<?php echo $faker->city ?>"/>
 <?php endif; ?>
     <address>
       <street><?php echo $faker->streetAddress ?></street>
